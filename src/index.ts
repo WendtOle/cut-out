@@ -53,7 +53,7 @@ const main = async () => {
   const regions = getRegions(width, height, horizontalTiles, verticalTiles);
   regions.forEach((region, index) => {
     const { left, top, width, height } = region;
-    const outputPath = `./dist/${index}.png`;
+    const outputPath = `./dist/${index}.webp`;
     sharp(imagePath)
       .extract({ left, top, width, height })
       .toFile(outputPath, (err, info) => {
