@@ -50,10 +50,13 @@ const main = async () => {
     console.error("Could not read width or height of the image");
     process.exit(1);
   }
+  const pathParts = imagePath.split("/");
+  const outputBasePath = pathParts.slice(0, -1).join("/");
+  const outputFileName = pathParts[pathParts.length - 1].split(".")[0];
   const regions = getRegions(width, height, horizontalTiles, verticalTiles);
   regions.forEach((region, index) => {
     const { left, top, width, height } = region;
-    const outputPath = `./dist/${index}.webp`;
+    const outputPath = `${outputBasePath}/${outputFileName}-${index}.webp`;
     sharp(imagePath)
       .extract({ left, top, width, height })
       .toFile(outputPath, (err, info) => {
